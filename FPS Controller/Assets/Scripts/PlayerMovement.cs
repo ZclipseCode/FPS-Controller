@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("General Movement")]
-    [SerializeField] float moveSpeed = 7;
     [SerializeField] Transform orientation;
+    [SerializeField] LayerMask ground;
+    [SerializeField] float moveSpeed = 7;
+    [SerializeField] float playerHeight = 2;
     [SerializeField] float groundDrag = 5;
     [SerializeField] float jumpForce = 6.5f;
     [SerializeField] float jumpCooldown = 0.25f;
@@ -16,9 +17,6 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
     Vector3 moveDirection;
     Rigidbody rb;
-    [Header("Ground Check")]
-    [SerializeField] float playerHeight = 2;
-    [SerializeField] LayerMask ground;
     bool grounded;
 
     private void Start()
@@ -33,15 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerInput();
         SpeedControl();
-
-        if (grounded)
-        {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
-        }
+        DragControl();
     }
 
     private void FixedUpdate()
@@ -99,5 +89,17 @@ public class PlayerMovement : MonoBehaviour
     void ResetJump()
     {
         readyToJump = true;
+    }
+
+    void DragControl()
+    {
+        if (grounded)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = 0;
+        }
     }
 }
