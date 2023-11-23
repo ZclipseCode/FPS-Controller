@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
+    [SerializeField] Transform orientation;
     [SerializeField] float xSensitivity = 400;
     [SerializeField] float ySensitivity = 400;
-
-    [SerializeField] Transform orientation;
-
     float xRotation;
     float yRotation;
+    PlayerControls playerControls;
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+        playerControls.Player.Enable();
+    }
 
     private void Start()
     {
@@ -20,8 +25,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * xSensitivity;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * ySensitivity;
+        float mouseX = playerControls.Player.LookX.ReadValue<float>() * xSensitivity;
+        float mouseY = playerControls.Player.LookY.ReadValue<float>() * ySensitivity;
 
         yRotation += mouseX;
 
@@ -30,5 +35,10 @@ public class PlayerCamera : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
+    private void OnDestroy()
+    {
+        playerControls.Player.Disable();
     }
 }

@@ -18,10 +18,18 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     Rigidbody rb;
     bool grounded;
+    PlayerControls playerControls;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        playerControls = new PlayerControls();
+        playerControls.Player.Enable();
+    }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
 
@@ -41,10 +49,10 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = playerControls.Player.Movement.ReadValue<Vector2>().x;
+        verticalInput = playerControls.Player.Movement.ReadValue<Vector2>().y;
 
-        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded)
+        if (playerControls.Player.Jump.ReadValue<float>() > 0 && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -101,5 +109,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.drag = 0;
         }
+    }
+
+    private void OnDestroy()
+    {
+        playerControls.Player.Disable();
     }
 }
