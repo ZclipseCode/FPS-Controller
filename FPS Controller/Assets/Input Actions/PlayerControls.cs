@@ -176,12 +176,78 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""Left Stick"",
+                    ""id"": ""58225493-6a0e-4d62-94ff-bb4f144fe955"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f43962df-db10-48e2-89bb-80d5fc59bc0d"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""eb58bae0-f2cd-466a-8396-550f4bc74e94"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""293cbb37-398a-4454-9d18-9f82294bbf60"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c8916463-cca6-4f55-9c80-82a57bc1475e"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""fe1a82be-39d4-4be9-8ecc-a43f311c5a47"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3839a76-fea2-4baf-a240-770150036f20"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -199,11 +265,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""52c87e7b-d7f7-4385-84c5-d75d92a280ef"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LookX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""980e72d0-4d47-4c14-ad32-f337b7a2b6f7"",
                     ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""LookY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93131e0e-fdcd-42ea-9be1-803430f5b0d6"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""LookY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -223,6 +311,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -370,6 +469,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (m_KeyboardandMouseSchemeIndex == -1) m_KeyboardandMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard and Mouse");
             return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
     public interface IPlayerActions
